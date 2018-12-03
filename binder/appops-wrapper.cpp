@@ -8,7 +8,8 @@ using android::String16;
 
 extern "C" {
 
-int appops_start_op_su(int uid, const char* pkgName) {
+int appops_start_op_su(int uid __unused, const char* pkgName __unused) {
+#if 0
     ALOGD("Checking whether app [uid:%d, pkgName: %s] is allowed to be root", uid, pkgName);
 
     AppOpsManager ops;
@@ -19,13 +20,16 @@ int appops_start_op_su(int uid, const char* pkgName) {
     }
 
     ALOGD("Privilege elevation denied by appops");
-    return 1;
+#endif
+    return 0;
 }
 
-void appops_finish_op_su(int uid, const char* pkgName) {
+void appops_finish_op_su(int uid __unused, const char* pkgName __unused) {
+#if 0
     ALOGD("Finishing su operation for app [uid:%d, pkgName: %s]", uid, pkgName);
     AppOpsManager* ops = new AppOpsManager();
     ops->finishOp(AppOpsManager::OP_SU, uid, String16(pkgName));
     delete ops;
+#endif
 }
 }
